@@ -1,20 +1,20 @@
 import React, { Component } from 'react';
 import { GoogleLogin } from 'react-google-login';
+import { connect } from 'react-redux'
 import google from '../../images/google.svg';
+import { LoginUser } from '../../actions'
 import '../../styles/App.css';
 
 class SignUp extends Component {
-  handleGoogle(e) {
+  handleGoogle = (e) => {
     if (e.error) {
-      console.log('HERe', e);
       return;
     }
-    console.log('You were successful Letting you in ');
-    // go to the other page
+    this.props.dispatch(LoginUser(e.profileObj))
   }
   render() {
     return (
-      <GoogleLogin
+       <GoogleLogin
         clientId="494574908988-eom8fhp3olniqkbbv1uvvav0mjoqk1gs.apps.googleusercontent.com"
         onSuccess={this.handleGoogle}
         onFailure={this.handleGoogle}
@@ -26,5 +26,7 @@ class SignUp extends Component {
     );
   }
 }
+
+SignUp = connect()(SignUp) 
 
 export default SignUp;
