@@ -1,7 +1,6 @@
 import React from 'react';
 import logo from '../images/logo.png';
 import SignUp from './SignUp/SignUp';
-
 import '../styles/App.css';
 
 const App = () => (
