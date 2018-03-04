@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { GoogleLogin } from 'react-google-login';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
+import { browserHistory } from 'react-router';
 import google from '../../images/google.svg';
 import { LoginUser } from '../../actions'
 import '../../styles/App.css';
@@ -11,6 +12,7 @@ class SignUp extends Component {
       return;
     }
     this.props.dispatch(LoginUser(e.profileObj))
+    browserHistory.push('/dashboard')
   }
   render() {
     return (

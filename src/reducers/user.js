@@ -1,13 +1,7 @@
-let initialState = {}
-
-export default (state = initialState, action)=> {
+export default (state = {}, action)=> {
   switch (action.type) {
     case 'LOGIN_USER':
-     return [
-       ...state,
-       {user: action.user}
-     ]
-      
+     return Object.assign({}, state, action.user)
     default:
       return state;
   }
