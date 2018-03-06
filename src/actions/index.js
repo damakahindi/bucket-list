@@ -1,16 +1,15 @@
 import axios from 'axios';
 
 export const RECEIVE_SECTIONS = 'RECEIVE_SECTIONS';
-export const SELECT_SECTIONS = 'SELECT_SECTIONS';
 export const LOGIN_USER = 'LOGIN_USER';
 
-const loginUser = (user, savedUser) => {
+export const loginUser = (user, savedUser) => {
   user.savedUserId = savedUser.data._id;
   user.doesExist = savedUser.data.doesExist;
   return ({ type: LOGIN_USER, user });
 };
 
-function receiveSections(sections) {
+export function receiveSections(sections) {
   return {
     type: RECEIVE_SECTIONS,
     sections,
