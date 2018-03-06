@@ -1,6 +1,6 @@
 import React from 'react';
 import logo from '../images/logo.png';
-import SignUp from '../containers/SignUp/SignUp';
+import SignUp from '../containers/SignUp';
 import '../styles/App.css';
 
 const App = () => (
