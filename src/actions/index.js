@@ -1,28 +1,39 @@
-// export function LoginUser(item){
-//   return {
-//     type:'LOGIN_USER',
-//     user: item.user
-//   }
-// }
+import axios from 'axios';
 
-export function LogoutUser(item){
+export const RECEIVE_SECTIONS = 'RECEIVE_SECTIONS';
+export const SELECT_SECTIONS = 'SELECT_SECTIONS';
+export const LOGIN_USER = 'LOGIN_USER';
+
+const loginUser = (user, savedUser) => {
+  user.savedUserId = savedUser.data._id;
+  user.doesExist = savedUser.data.doesExist;
+  return ({ type: LOGIN_USER, user });
+};
+
+function receiveSections(sections) {
   return {
-    type:'LOGOUT_USER',
-    user: item.user
-  }
+    type: RECEIVE_SECTIONS,
+    sections,
+  };
 }
 
-export function AddSection(item){
-  return {
-    type:'LOGIN_USER',
-    user: item.section
-  }
+
+export function saveUser(user) {
+  return dispatch => axios.post('http://127.0.0.1:5000/api/user', { googleId: user.email })
+    .then(savedUser => dispatch(loginUser(user, savedUser)));
 }
 
-export function AddBucketList(item){
-  return {
-    type:'LOGIN_USER',
-    user: item.bucketlist
-  }
+
+function fetchSections(userId) {
+  return dispatch => axios.get(`http://127.0.0.1:5000/api/user/${userId}/section`)
+    .then(sections => dispatch(receiveSections(sections)));
 }
-export const LoginUser = user => ({ type: "LOGIN_USER", user: user });
+
+export function fetchSectionsIfUserExists() {
+  return (dispatch, getState) => {
+    const { user } = getState();
+    if (user.doesExist) {
+      return dispatch(fetchSections(user.savedUserId));
+    }
+  };
+}

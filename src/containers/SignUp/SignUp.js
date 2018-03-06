@@ -3,15 +3,16 @@ import { GoogleLogin } from 'react-google-login';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 import google from '../../images/google.svg';
-import { LoginUser } from '../../actions'
+import { saveUser, fetchSectionsIfUserExists } from '../../actions'
 import '../../styles/App.css';
 
 class SignUp extends Component {
   handleGoogle = (e) => {
+    const { dispatch } = this.props
     if (e.error) {
       return;
     }
-    this.props.dispatch(LoginUser(e.profileObj))
+    dispatch(saveUser(e.profileObj))
     browserHistory.push('/dashboard')
   }
   render() {

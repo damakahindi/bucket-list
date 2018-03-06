@@ -5,18 +5,18 @@
 }
 
 .Layer {
-    background-color: #00000085;
+    background-color: #000000e0;
     position: absolute;
-    top: 10%;
+    top: 12%;
     bottom: 0;
     right: 0;
-    left: 20%;
+    left: 15%;
     width: 70%;
     height: 75%;
-    border-left: 1px solid #00000085;
-    border-top: 1px solid #00000085;
-    border-right: 1px solid #00000085;
-    border-bottom: 1px solid #00000085;
+    border-left: 1px solid #000000e0;
+    border-top: 1px solid #000000e0;
+    border-right: 1px solid #000000e0;
+    border-bottom: 1px solid #000000e0;
 }
 
 .Title {
