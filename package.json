@@ -39,6 +39,7 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
+    "axios-mock-adapter": "^1.14.1",
     "chai": "^4.1.2",
     "enzyme-adapter-react-15": "^1.0.5",
     "eslint-config-airbnb": "^16.1.0",
