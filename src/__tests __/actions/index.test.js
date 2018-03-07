@@ -1,13 +1,10 @@
-import configureMockStore from 'redux-mock-store';
+import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import axios from 'axios';
-import MockAdapter from 'axios-mock-adapter';
+import moxios from 'moxios';
 import * as actions from '../../actions/index';
 
 const middlewares = [thunk];
-const mockStore = configureMockStore(middlewares);
-const mock = new MockAdapter(axios);
-
+const mockStore = configureStore(middlewares);
 describe('Actions Creators', () => {
   describe('Synchenous Actions', () => {
     describe('loginUser', () => {
@@ -33,28 +30,23 @@ describe('Actions Creators', () => {
     });
   });
   describe('async actions', () => {
-    afterEach(() => {
-      fetchMock.reset();
-      fetchMock.restore();
-    });
-
     describe('fetchSections', () => {
-      it('creates FETCH_TODOS_SUCCESS when fetching todos has been done', () => {
-        mock
-          .onPost('/blah/sections').reply(200, {
-            sections: [{ title: 'Travelling', googleId: 'random' }],
-          });
-
+      it('creates FETCH_RECEIVE_SECTIONS when fetching sections has been done', () => {
         const expectedAction = [{
           type: actions.RECEIVE_SECTIONS,
-          body: [{ title: 'Travelling', googleId: 'random' }],
+          section: [{ title: 'Travelling', googleId: 'random' }],
         },
         ];
-        const store = mockStore({ sections: [] });
-
-        return store.dispatch(actions.fetchSections('blah')).then(() => {
-          // return of async actions
-          expect(store.getActions()).toEqual(expectedAction);
+        const store = mockStore([]);
+        moxios.wait(() => {
+          const request = moxios.requests.mostRecent();
+          request.respondWith({
+            status: 200,
+            response: [{ title: 'Travelling', googleId: 'random' }],
+          }).then(() => {
+            store.dispatch(actions.fetchSections('blah'));
+            expect(store.getActions()).toEqual(expectedAction);
+          });
         });
       });
     });

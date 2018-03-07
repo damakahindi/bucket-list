@@ -9,12 +9,10 @@ export const loginUser = (user, savedUser) => {
   return ({ type: LOGIN_USER, user });
 };
 
-export function receiveSections(sections) {
-  return {
-    type: RECEIVE_SECTIONS,
-    sections,
-  };
-}
+export const receiveSections = sections => ({
+  type: RECEIVE_SECTIONS,
+  sections,
+});
 
 
 export function saveUser(user) {
@@ -23,7 +21,7 @@ export function saveUser(user) {
 }
 
 
-function fetchSections(userId) {
+export function fetchSections(userId) {
   return dispatch => axios.get(`http://127.0.0.1:5000/api/user/${userId}/section`)
     .then(sections => dispatch(receiveSections(sections)));
 }
