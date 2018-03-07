@@ -6,7 +6,7 @@ export const ADD_SECTION = 'ADD_SECTION';
 export const ADD_BUCKET = 'ADD_BUCKET';
 export const LOGIN_USER = 'LOGIN_USER';
 
-let sectionId = 0;
+let sectionId = 1;
 let bucketId = 1000;
 
 export const loginUser = (user, savedUser) => {
@@ -44,7 +44,7 @@ export function saveUser(user) {
 }
 
 
-function fetchSections(userId) {
+export function fetchSections(userId) {
   return dispatch => axios.get(`http://127.0.0.1:5000/api/user/${userId}/section`)
     .then(sections => dispatch(receiveSections(sections)));
 }
