@@ -9,7 +9,7 @@ export const LOGIN_USER = 'LOGIN_USER';
 let sectionId = 0;
 let bucketId = 1000;
 
-const loginUser = (user, savedUser) => {
+export const loginUser = (user, savedUser) => {
   user.savedUserId = savedUser.data._id;
   user.doesExist = savedUser.data.doesExist;
   return ({ type: LOGIN_USER, user });
