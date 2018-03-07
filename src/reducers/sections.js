@@ -1,7 +1,7 @@
-export default (state = {}, action) => {
+export default (state = [], action) => {
   switch (action.type) {
     case 'RECEIVE_SECTIONS':
-      return Object.assign({}, state, action.sections);
+      return state.concat([action.sections]);
     default:
       return state;
   }

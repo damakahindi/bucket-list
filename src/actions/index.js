@@ -1,21 +1,18 @@
 import axios from 'axios';
 
 export const RECEIVE_SECTIONS = 'RECEIVE_SECTIONS';
-export const SELECT_SECTIONS = 'SELECT_SECTIONS';
 export const LOGIN_USER = 'LOGIN_USER';
 
-const loginUser = (user, savedUser) => {
+export const loginUser = (user, savedUser) => {
   user.savedUserId = savedUser.data._id;
   user.doesExist = savedUser.data.doesExist;
   return ({ type: LOGIN_USER, user });
 };
 
-function receiveSections(sections) {
-  return {
-    type: RECEIVE_SECTIONS,
-    sections,
-  };
-}
+export const receiveSections = sections => ({
+  type: RECEIVE_SECTIONS,
+  sections,
+});
 
 
 export function saveUser(user) {
@@ -24,7 +21,7 @@ export function saveUser(user) {
 }
 
 
-function fetchSections(userId) {
+export function fetchSections(userId) {
   return dispatch => axios.get(`http://127.0.0.1:5000/api/user/${userId}/section`)
     .then(sections => dispatch(receiveSections(sections)));
 }
