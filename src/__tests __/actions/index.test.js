@@ -6,7 +6,7 @@ import * as actions from '../../actions/index';
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
 describe('Actions Creators', () => {
-  describe('Synchenous Actions', () => {
+  describe('Synchronous Actions', () => {
     describe('loginUser', () => {
       it('should create an action to login a user', () => {
         const user = { googleId: 'random', name: 'Esther Dama' };
@@ -26,6 +26,26 @@ describe('Actions Creators', () => {
           sections,
         };
         expect(actions.receiveSections(sections)).toEqual(expectedAction);
+      });
+    });
+    describe('addBuckets', () => {
+      it('should create an action to receive addBuckets', () => {
+        const bucket = { title: 'Travelling', description: 'random', id: 1000 };
+        const expectedAction = {
+          type: actions.ADD_BUCKET,
+          bucket,
+        };
+        expect(actions.addBuckets(bucket)).toEqual(expectedAction);
+      });
+    });
+    describe('addSection', () => {
+      it('should create an action to receive addSection', () => {
+        const section = { title: 'Travelling', description: 'random', id: 1 };
+        const expectedAction = {
+          type: actions.ADD_SECTION,
+          section,
+        };
+        expect(actions.addSections(section)).toEqual(expectedAction);
       });
     });
   });
