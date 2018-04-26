@@ -6,7 +6,7 @@ import '../styles/NotFound.css';
 
 const NotFound = () =>
   (
-    <div className="notFound">
+    <div className="NotFoundBody">
       <div className="Layer">
         <h1 className="Title">404 </h1>
         <p className="App-intro">Page not found</p>
